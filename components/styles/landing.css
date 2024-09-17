@@ -1,0 +1,236 @@
+section {
+  padding-top: 4vh;
+  height: 96vh;
+  margin: 0 10rem;
+  box-sizing: border-box;
+  min-height: fit-content;
+}
+
+.landing {
+  position: relative;
+  height: 100vh;
+  background: url("../images/landing_bg.png") no-repeat center center/cover;
+}
+
+.section__text {
+  margin-top: 20%;
+}
+
+#landing__properties__sale {
+  padding: 60px 0;
+  margin: 0;
+  background-color: #f8fbf8;
+  width: 100%; /* Ensures full width */
+  min-height: 100vh; /* Ensures it covers at least the full viewport height */
+  box-sizing: border-box;
+}
+
+.properties__sale__header {
+  margin-bottom: 30px;
+}
+
+.properties__sale__h1 {
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.properties__sale__p1 {
+  font-size: 18px;
+  color: #6c757d;
+}
+/* CSS */
+.button-59 {
+  border-radius: 0%;
+  align-items: center;
+  background-color: #fff;
+  /* border: 2px solid #000; */
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -0.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+.button-59:active {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+/* Change the color of the navbar toggle icon to white */
+.navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+  font-size: xx-large;
+}
+
+/* Adjust border color for the button if needed */
+.navbar-toggler {
+  border: none;
+}
+
+.property-card {
+  margin-bottom: 30px;
+  /*border: none;  Remove the card outline */
+  box-shadow: none;
+}
+
+.property-card .card-img-top {
+  height: 400px;
+  object-fit: cover;
+}
+
+.property-card .card-title {
+  font-weight: bold;
+}
+
+.property-card .card-subtitle {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.property-card .card-text small {
+  color: #6c757d;
+}
+
+.aboutus__img {
+  width: 450px;
+  height: 650px;
+  object-fit: cover;
+}
+
+#landing__testimonials__section {
+  background-color: #d3d3d3; /* Gray background */
+  color: black; /* Black font color */
+  min-height: 100vh;
+}
+
+/* Heading Style */
+.landing__testimonials__heading {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/* Testimonial Card Styling */
+.landing__testimonial__card {
+  background-color: transparent;
+  text-align: left;
+}
+
+/* Testimonial Author */
+.landing__testimonial__author {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(22, 22, 22);
+  margin-top: 10px;
+}
+
+/* Line Styling (Optional) */
+.landing__testimonial__card:before {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 2px;
+  background-color: rgb(122, 85, 85);
+  margin-bottom: 10px;
+}
+
+#landing__agents__section {
+  background-color: #fff; /* White background */
+}
+
+#landing__agents__section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#landing__agents__section p {
+  font-size: 1.2rem;
+  color: #555; /* Subtle gray */
+}
+
+.landing__agent__card {
+  margin-bottom: 30px;
+}
+
+.slick-next {
+  right: 0;
+}
+
+.slick-slide {
+  margin: 10px;
+}
+
+.landing__agent__img {
+  object-fit: cover;
+  width: 100%;
+  height: 250px;
+}
+
+.landing__agent__text {
+  color: #666;
+  font-size: 1rem;
+}
+
+#landing_footer_section {
+  background-color: #000;
+  padding: 80px 0;
+  color: #ccd5d8;
+  margin: 0;
+  height: 100vh;
+}
+
+.landing__footer__heading {
+  font-size: 3rem;
+  color: #ccd5d8;
+}
+
+.landing__footer__info {
+  font-size: 1rem;
+  color: #ccd5d8;
+  line-height: 1.8;
+  margin-top: 10%;
+}
+
+.landing__footer__btn {
+  padding: 10px 30px;
+  font-size: 1rem;
+}
+
+.landing__footer__icon {
+  font-size: 1.5rem;
+  color: #ccd5d8;
+  margin: 0 15px;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 170px;
+  }
+}

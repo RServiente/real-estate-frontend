@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Table, Button, Form, Container, Row, Col, Alert, Navbar, Nav, Dropdown, Image } from "react-bootstrap";
 import axios from "axios";
 
 function UserDashboard() {
@@ -55,7 +56,6 @@ function UserDashboard() {
           { ...newProperty },
           { withCredentials: true }
         );
-        console.log("Update Response:", response.data);
         if (response.data.Status === "Success") {
           const updatedProperties = await axios.get(`http://localhost:3001/properties/user/${userID}`, { withCredentials: true });
           setProperties(updatedProperties.data.properties);
@@ -113,83 +113,140 @@ function UserDashboard() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Welcome, {username}!</h1>
-      <h1>UserID: {userID}!</h1>
-      <button onClick={handleLogout} style={{ marginBottom: '20px' }}>Logout</button>
+    <>
+      {/* Navbar */}
+      <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
+        <Container>
+          <Navbar.Brand href="#home">Real Estate Dashboard</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              {/* User Profile Dropdown */}
+              <Dropdown align="end">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                  <Image
+                    src="https://via.placeholder.com/40" // Replace with user profile image URL if available
+                    roundedCircle
+                    width="30"
+                    height="30"
+                    alt="User Profile"
+                  />{" "}
+                  {username}
+                </Dropdown.Toggle>
 
-      <h2>{editMode ? "Edit Property" : "Add Property"}</h2>
-      <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
-        <div>
-          <label>
-            Title:
-            <input
-              type="text"
-              name="title"
-              value={newProperty.title}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Description:
-            <textarea
-              name="description"
-              value={newProperty.description}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Price:
-            <input
-              type="number"
-              name="price"
-              value={newProperty.price}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Location:
-            <input
-              type="text"
-              name="location"
-              value={newProperty.location}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-        <button type="submit">{editMode ? "Update Property" : "Add Property"}</button>
-        {editMode && <button type="button" onClick={handleCancelEdit}>Cancel</button>}
-      </form>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* Main Content */}
+      <Container>
+        <h2>{editMode ? "Edit Property" : "Add Property"}</h2>
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Col>
+              <Form.Group controlId="formTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="title"
+                  value={newProperty.title}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col>
+              <Form.Group controlId="formDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  name="description"
+                  value={newProperty.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group controlId="formPrice">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="price"
+                  value={newProperty.price}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group controlId="formLocation">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="location"
+                  value={newProperty.location}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Button variant="success" type="submit">
+            {editMode ? "Update Property" : "Add Property"}
+          </Button>
+          {editMode && (
+            <Button variant="secondary" className="ms-2" onClick={handleCancelEdit}>
+              Cancel
+            </Button>
+          )}
+        </Form>
 
-      <h2>Your Properties</h2>
-      {properties.length > 0 ? (
-        <ul>
-          {properties.map((property) => (
-            <li key={property.id}>
-              <h3>{property.title}</h3>
-              <p>{property.description}</p>
-              <p>Price: ${property.price}</p>
-              <p>Location: {property.location}</p>
-              <button onClick={() => handleEdit(property)}>Edit</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>You have no properties listed.</p>
-      )}
-    </div>
+        {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+
+        <h2 className="mt-5">Your Properties</h2>
+        {properties.length > 0 ? (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {properties.map((property) => (
+                <tr key={property.id}>
+                  <td>{property.title}</td>
+                  <td>{property.description}</td>
+                  <td>${property.price}</td>
+                  <td>{property.location}</td>
+                  <td>
+                    <Button variant="warning" onClick={() => handleEdit(property)} className="me-2">
+                      Edit
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <p>You have no properties listed.</p>
+        )}
+      </Container>
+    </>
   );
 }
 

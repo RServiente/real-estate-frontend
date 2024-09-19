@@ -21,7 +21,7 @@ section {
   margin: 0;
   background-color: #f8fbf8;
   width: 100%; /* Ensures full width */
-  min-height: 100vh; /* Ensures it covers at least the full viewport height */
+  min-height: 150vh; /* Ensures it covers at least the full viewport height */
   box-sizing: border-box;
 }
 
@@ -83,6 +83,8 @@ section {
   fill: #06f;
 }
 
+#landing__info__section {
+}
 /* Change the color of the navbar toggle icon to white */
 .navbar-toggler-icon {
   filter: brightness(0) invert(1);

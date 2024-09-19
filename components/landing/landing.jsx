@@ -132,7 +132,8 @@ function Login() {
       });
   }, [navigate]);
 
-  const login = () => {
+  const login = (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
     axios
       .post(
         "http://localhost:3001/auth/login",
@@ -155,15 +156,17 @@ function Login() {
           const role = response.data.role;
           if (role === "admin") {
             navigate(`/admin/dashboard/${userID}`);
-          } else {
+          } else if (role == "user") {
             navigate(`/dashboard/${userID}`);
-          }
+          } 
         } else {
           setError("Invalid credentials. Please try again.");
+          handleShow(); // Keep the modal open on error
         }
       })
       .catch(() => {
         setError("An error occurred. Please try again later.");
+        handleShow(); // Keep the modal open on error
       });
   };
 

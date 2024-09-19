@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-
 import house_img1 from '../images/house1.png';
 import '../styles/landing.css';
 import Container from 'react-bootstrap/Container';
-import { Row, Col, Card} from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 
-function ForSaleProperties(){
-    const [properties,setProperties] = useState([]);
-    const [error, setError] = useState([]);
+function ForSaleProperties() {
+  const [properties, setProperties] = useState([]);
+  const [error, setError] = useState([]);
 
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/properties/forsale`);
+        setProperties(response.data.properties);
+      } catch (error) {
+        console.error("Failed to fetch properties", error);
+        setError(error);
+      }
+    };
 
-    useEffect(() => {
-        const fetchProperties = async () => {
-          try {
-            const response = await axios.get(`http://localhost:3001/properties/forsale`);
-            setProperties(response.data.properties);
-          } catch (error) {
-            console.error("Failed to fetch properties", error);
-            setError(error);
-          }
-        };
-    
-        fetchProperties();
-      }, []);
-  
+    fetchProperties();
+  }, []);
 
-    return (
+  return (
     <section>
       <Container>
         <div className="properties__sale__header d-flex justify-content-between">
@@ -38,7 +34,7 @@ function ForSaleProperties(){
           <Row>
             {properties.length > 0 ? (
               properties.map((property) => (
-                <Col md={4}>
+                <Col key={property.id} md={4}> {/* Add the key prop here */}
                   <Card className="property-card">
                     <Card.Img variant="top" src={house_img1} />
                     <Card.Body>
@@ -47,8 +43,8 @@ function ForSaleProperties(){
                       <Card.Text>
                         {property.description}
                         <br />
-                          <small>{property.location}</small>
-                          <small>{property.price}</small>
+                        <small>{property.location}</small>
+                        <small>{property.price}</small>
                       </Card.Text>
                     </Card.Body>
                   </Card>
@@ -60,7 +56,8 @@ function ForSaleProperties(){
           </Row>
         </div>
       </Container>
-    </section> 
-);
+    </section>
+  );
 }
+
 export default ForSaleProperties;

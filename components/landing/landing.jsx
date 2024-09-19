@@ -115,11 +115,11 @@ function Login() {
           const role = results.data.role;
           const userID = results.data.userID;
           const username = results.data.username;
-
+  
           // Store user data in localStorage
-          localStorage.getItem("username", username);
-          localStorage.getItem("userID", userID);
-
+          localStorage.setItem("username", username);
+          localStorage.setItem("userID", userID);
+  
           if (role === "admin") {
             navigate(`/admin/dashboard/${userID}`);
           } else {
@@ -128,7 +128,7 @@ function Login() {
         }
       })
       .catch((err) => {
-        console.log("Not authenticated or failed to fetch profile", err);
+        console.error("Not authenticated or failed to fetch profile", err);
       });
   }, [navigate]);
 
@@ -146,7 +146,7 @@ function Login() {
       .then((response) => {
         if (response.data.Status === "Success") {
           const userID = response.data.userID;
-          localStorage.setItem("valid", true);
+          localStorage.setItem("valid", "true"); // When setting authentication
 
           localStorage.setItem("username", username);
           localStorage.setItem("userID", userID);
